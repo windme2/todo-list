@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- กระดาษพื้นหลัง -->
+  <path d="M7 4C7 2.89543 7.89543 2 9 2H23C24.1046 2 25 2.89543 25 4V28C25 29.1046 24.1046 30 23 30H9C7.89543 30 7 29.1046 7 28V4Z" fill="white" stroke="#646CFF" stroke-width="2"/>
+  <!-- เส้นบรรทัด -->
+  <line x1="10" y1="10" x2="22" y2="10" stroke="#646CFF" stroke-width="2" stroke-linecap="round"/>
+  <line x1="10" y1="16" x2="22" y2="16" stroke="#646CFF" stroke-width="2" stroke-linecap="round"/>
+  <line x1="10" y1="22" x2="18" y2="22" stroke="#646CFF" stroke-width="2" stroke-linecap="round"/>
+  <!-- มุมพับ -->
+  <path d="M19 2L25 8H19V2Z" fill="#646CFF" fill-opacity="0.2"/>
+</svg>
