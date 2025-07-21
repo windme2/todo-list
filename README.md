@@ -1,9 +1,8 @@
 # 📝 Todo List Application
 
-## 📖 Overview
 A modern and feature-rich todo list application built with React, TypeScript, and TailwindCSS. Manage your tasks efficiently with priority levels, filtering options, and a beautiful responsive interface.
 
-## 🛠️ Tech Stack (Planned Structure)
+## 🛠️ Tech Stack
 
 - **Frontend Framework: React**
 - **Type Safety: TypeScript** 
