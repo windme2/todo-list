@@ -13,20 +13,6 @@ A modern and feature-rich todo list application built with React, TypeScript, an
 - **State Management: React Hooks**
 - **Data Persistence: LocalStorage**
 
-## 📁 Project Structure
-```
-todolist/
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── lib/           # Utilities and helpers
-│   ├── pages/         # Page components
-│   ├── types/         # TypeScript type definitions
-│   ├── App.tsx        # Main application component
-│   └── main.tsx       # Application entry point
-├── public/            # Static assets
-└── ...config files
-```
-
 ## ✨ Features
 
 ### Task Management
