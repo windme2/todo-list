@@ -43,10 +43,6 @@ A modern and feature-rich todo list application built with React, TypeScript, an
 ### Clone the repository
 ```bash
 git clone https://github.com/windme2/todo-list.git
-```
-
-### Navigate to project directory
-```bash
 cd todolist
 ```
 
