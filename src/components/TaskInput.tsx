@@ -17,6 +17,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
   const [text, setText] = useState("");
   const [detail, setDetail] = useState("");
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [hasError, setHasError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,17 +26,27 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
       setText("");
       setDetail("");
       setPriority("medium");
+      setHasError(false);
+    } else {
+      setHasError(true);
+    }
+  };
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+    if (hasError && e.target.value.trim()) {
+      setHasError(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <Input
         type="text"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={handleTextChange}
         placeholder="Enter your task here..."
-        className="w-full"
+        className={`w-full ${hasError ? 'border-red-500 border-2' : ''}`}
       />
       <Textarea
         value={detail}
@@ -43,7 +54,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
         placeholder="Add more details about your task (optional)"
         className="w-full"
       />
-      <div className="space-y-2">
+      <div className="space-y-3">
         <Label>Priority</Label>
         <RadioGroup
           value={priority}
@@ -71,10 +82,10 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
             </Label>
           </div>
         </RadioGroup>
-        <Button type="submit" className="w-full mt-4">
-          Add Task
-        </Button>
       </div>
+      <Button type="submit" className="w-full mt-2">
+        Add Task
+      </Button>
     </form>
   );
 };

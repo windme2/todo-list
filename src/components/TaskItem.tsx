@@ -50,7 +50,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
     if (e.key === "Enter" && !e.shiftKey && editText.trim()) {
       e.preventDefault();
       onEdit(task.id, editText, editDetail, editPriority);
-      toast.success("Task updated successfully");
+      // ลบ toast ออกเพื่อป้องกันการซ้ำซ้อนกับ handleEdit
       setIsEditing(false);
       setIsExpanded(!!editDetail);
     }
@@ -58,14 +58,15 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   const handleDelete = () => {
     onDelete(task.id);
-    toast.error("Task deleted");
+    toast.success("Task deleted successfully");
   };
 
   const handleToggle = () => {
     onToggleComplete(task.id);
-    toast.success(
-      task.completed ? "Task marked as incomplete" : "Task completed"
-    );
+    // Only show toast when completing tasks, not when unchecking
+    if (!task.completed) {
+      toast.success("Task completed successfully");
+    }
   };
 
   const getPriorityBadge = () => {
@@ -126,7 +127,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                     getPriorityBadge()
                   )}
                 >
-                  {task.priority}
+                  {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                 </span>
               </div>
               <time className="text-xs text-gray-400 mt-1">
@@ -150,7 +151,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
               )}
             </Button>
           )}
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity flex">
+          <div className="opacity-60 group-hover:opacity-100 transition-opacity flex">
             <Button
               variant="ghost"
               size="sm"

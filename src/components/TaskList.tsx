@@ -26,7 +26,7 @@ const TaskList: React.FC<TaskListProps> = ({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}

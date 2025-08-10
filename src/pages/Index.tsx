@@ -5,7 +5,7 @@ import TaskList from "@/components/TaskList";
 import { Task } from "@/types/task";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Filter } from "lucide-react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/EmptyState";
 
 type FilterType = "all" | "active" | "completed";
@@ -56,12 +56,10 @@ const Index: React.FC = () => {
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-    toast.success("Task status updated");
   };
 
   const handleDeleteTask = (id: string) => {
     setTasks(tasks.filter((task) => task.id !== id));
-    toast.error("Task deleted");
   };
 
   const handleEditTask = (
@@ -82,7 +80,6 @@ const Index: React.FC = () => {
           : task
       )
     );
-    toast.info("Task updated");
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -94,77 +91,96 @@ const Index: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 px-4 py-5 transition-all duration-500">
-      <div className="max-w-2xl mx-auto">
-        <Card className="shadow-xl border-none bg-white/95 backdrop-blur-xl transition-all duration-300 hover:shadow-2xl rounded-xl overflow-hidden">
-          <CardHeader className="pb-3 pt-5 px-4 border-b border-gray-100/20">
-            <div className="text-center space-y-1.5">
-              <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 animate-fade-in">
-                Todo List
-              </h1>
-              <p className="text-sm text-gray-600 animate-fade-in animation-delay-200">
-                Manage your tasks efficiently and stay organized
-              </p>
-            </div>
-          </CardHeader>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 px-4 pt-24 pb-4 transition-all duration-500 flex items-center justify-center">
+      <div className="w-full max-w-6xl mx-auto">
+        {/* Main Card Container */}
+        <Card className="shadow-2xl border-none bg-white/98 backdrop-blur-xl transition-all duration-300 hover:shadow-3xl rounded-2xl overflow-hidden animate-fade-in">
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+              {/* Left Section - Add Task Form */}
+              <div className="p-8 lg:p-10 relative bg-white flex flex-col">
+                {/* Header centered and prominent */}
+                <div className="text-center mb-8">
+                  <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-4">
+                    Todo List
+                  </h1>
+                  <p className="text-gray-600 text-lg">
+                    Manage your tasks efficiently and stay organized
+                  </p>
+                </div>
+                
+                <div className="flex-1 flex items-start justify-center">
+                  <div className="w-full bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-gray-200/50">
+                    <TaskInput onAddTask={handleAddTask} />
+                  </div>
+                </div>
 
-          <CardContent className="p-4 space-y-4">
-            <div className="bg-gray-50/70 p-4 rounded-lg shadow-inner transition-all duration-300 hover:bg-gray-50/90">
-              <TaskInput onAddTask={handleAddTask} />
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-gray-200">
-                <Filter className="h-4 w-4 text-indigo-500" />
-                <span className="font-medium text-gray-700">View Tasks</span>
+                {/* Enhanced Divider with stronger shadow */}
+                <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-gray-400 to-transparent shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-300/50 to-transparent blur-sm"></div>
+                </div>
               </div>
 
-              <Tabs
-                defaultValue="all"
-                value={filter}
-                onValueChange={(value) => setFilter(value as FilterType)}
-                className="w-full"
-              >
-                <TabsList className="grid w-full grid-cols-3 bg-gray-100/80 p-1 rounded-lg gap-1">
-                  <TabsTrigger
-                    value="all"
-                    className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm transition-all duration-200 px-3 py-1.5"
-                  >
-                    All Tasks
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="active"
-                    className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm transition-all duration-200 px-3 py-1.5"
-                  >
-                    In Progress
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="completed"
-                    className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm transition-all duration-200 px-3 py-1.5"
-                  >
-                    Completed
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
+              {/* Right Section - Task List */}
+              <div className="p-8 lg:p-10 bg-white">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Filter className="h-6 w-6 text-indigo-600" />
+                    <h2 className="text-2xl font-bold text-gray-800">
+                      Tasks Overview
+                    </h2>
+                  </div>
 
-            <div className="space-y-4">
-              {filteredTasks.length === 0 ? (
-                <EmptyState />
-              ) : (
-                <TaskList
-                  tasks={filteredTasks}
-                  onToggleComplete={handleToggleComplete}
-                  onDelete={handleDeleteTask}
-                  onEdit={handleEditTask}
-                />
-              )}
+                  <Tabs
+                    defaultValue="all"
+                    value={filter}
+                    onValueChange={(value) => setFilter(value as FilterType)}
+                    className="w-full"
+                  >
+                    <TabsList className="grid w-full grid-cols-3 bg-gray-50 p-1 rounded-xl gap-0 border-0 h-12">
+                      <TabsTrigger
+                        value="all"
+                        className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm data-[state=active]:font-semibold transition-all duration-200 h-10 rounded-lg font-medium text-gray-600 hover:text-gray-800"
+                      >
+                        All Tasks
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="active"
+                        className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm data-[state=active]:font-semibold transition-all duration-200 h-10 rounded-lg font-medium text-gray-600 hover:text-gray-800"
+                      >
+                        In Progress
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="completed"
+                        className="data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-sm data-[state=active]:font-semibold transition-all duration-200 h-10 rounded-lg font-medium text-gray-600 hover:text-gray-800"
+                      >
+                        Completed
+                      </TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+
+                  <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
+                    {filteredTasks.length === 0 ? (
+                      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-8 border border-gray-200/50 shadow-sm">
+                        <EmptyState />
+                      </div>
+                    ) : (
+                      <TaskList
+                        tasks={filteredTasks}
+                        onToggleComplete={handleToggleComplete}
+                        onDelete={handleDeleteTask}
+                        onEdit={handleEditTask}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        <footer className="text-center mt-4 mb-2">
-          <p className="text-sm text-gray-500">
+        <footer className="text-center mt-8">
+          <p className="text-sm text-white/90 font-medium">
             © 2025 Intouch Charoenphon. All rights reserved.
           </p>
         </footer>
