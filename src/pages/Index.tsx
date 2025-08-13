@@ -92,11 +92,11 @@ const Index: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 px-4 pt-24 pb-4 transition-all duration-500 flex items-center justify-center">
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Main Card Container */}
         <Card className="shadow-2xl border-none bg-white/98 backdrop-blur-xl transition-all duration-300 hover:shadow-3xl rounded-2xl overflow-hidden animate-fade-in">
           <CardContent className="p-0">
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[700px]">
               {/* Left Section - Add Task Form */}
               <div className="p-8 lg:p-10 relative bg-white flex flex-col">
                 {/* Header centered and prominent */}

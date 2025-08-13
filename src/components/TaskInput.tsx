@@ -52,7 +52,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
         value={detail}
         onChange={(e) => setDetail(e.target.value)}
         placeholder="Add more details about your task (optional)"
-        className="w-full"
+        className="w-full min-h-[200px] resize-none"
       />
       <div className="space-y-3">
         <Label>Priority</Label>
